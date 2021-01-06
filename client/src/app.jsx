@@ -1,11 +1,12 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import Graph from './graph/graph.jsx'
 
-class App extends React.Component {
-  render () {
-    return (
-      <div>Rendered</div>
-    )
-  }
+function App () {
+  return (
+    <div>
+      <Graph />
+    </div>
+  )
 }
 
 export default App
