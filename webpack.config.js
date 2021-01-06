@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   watch: true,
   mode: 'development',
-  entry: path.resolve(__dirname, './client/src/app.jsx'),
+  entry: path.resolve(__dirname, './client/src/index.jsx'),
   module: {
     rules: [
       {

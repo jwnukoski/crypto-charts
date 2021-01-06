@@ -1,9 +1,11 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
-const title = 'React with Webpack and Babel'
+class App extends React.Component {
+  render () {
+    return (
+      <div>Rendered</div>
+    )
+  }
+}
 
-ReactDOM.render(
-  <div>{title}</div>,
-  document.getElementById('app')
-)
+export default App
