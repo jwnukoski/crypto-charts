@@ -1,0 +1,22 @@
+.listingWrapperInactive, .listingWrapperActive {
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid lightgrey;
+}
+
+.listingWrapperActive {
+  background-color: #6D78AD;
+}
+
+.listingWrapperInactive:hover {
+  background-color: #afb6d6;
+}
+
+.listSymbol {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.listName {
+  font-weight: lighter;
+}

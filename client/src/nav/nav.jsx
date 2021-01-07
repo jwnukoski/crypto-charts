@@ -4,7 +4,7 @@ import styles from './css/nav.module.css'
 
 function Nav () {
   return (
-		<div>Crypto-Charts</div>
+    <div></div>
   )
 }
 

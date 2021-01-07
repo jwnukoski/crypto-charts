@@ -1,0 +1,10 @@
+.navWrapper {
+  min-height: 2em;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.branding {
+  font-weight: bold;
+  font-size: 2em;
+}
