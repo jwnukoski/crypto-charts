@@ -1,9 +1,11 @@
+const cache = require('./cache.js')
 const express = require('express')
 const app = express()
 const path = require('path')
 const conn = require('./connection.js')
 const axios = require('axios')
-const helpers = require('./helpers.js')
+
+const dailyCache = new cache.DailyCache()
 
 app.use(express.static(path.join(__dirname, '../client/dist')))
 
@@ -11,7 +13,10 @@ app.get('/api/graph/:coin/history/:time', (req, res) => {
   const coin = req.params.coin
   const time = req.params.time
 
-  if (time === 'all' && coin === 'btc') {
+  if (dailyCache.isCachedDataGood(`${coin}_${time}`)) {
+    console.log('sent from cache')
+    res.status(200).send(dailyCache.getCachedData(`${coin}_${time}`))
+  } else {
     axios.get('https://api.coindesk.com/v1/bpi/historical/close.json').then(response => {
       const clientData = []
 
@@ -21,6 +26,9 @@ app.get('/api/graph/:coin/history/:time', (req, res) => {
           x: key
         })
       }
+
+      dailyCache.addToCache(`${coin}_${time}`, clientData)
+      console.log('saved to cache')
 
       res.status(200).send(clientData)
     }).catch(err => {

@@ -1,53 +1,29 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 /* App.js */
+import PropTypes from 'prop-types'
 import { CanvasJSChart } from 'canvasjs-react-charts'
-const React = require('react')
-const Component = React.Component
+import React, { useEffect } from 'react'
 
-class Graph extends Component {
-  render () {
-    const dataPoints = []
-    this.props.graphData.forEach(val => {
-      const splitDate = val.x.split('-')
-      dataPoints.push({ y: val.y, x: new Date(splitDate[0], splitDate[1], splitDate[2]) })
-    })
+function Graph (props) {
+  let chart = null
 
-    const options = {
-      theme: 'light2',
-      title: {
-        text: 'Stock Price of NIFTY 50'
-      },
-      axisX: {
-        text: 'timeline',
-        gridThickness: 2
-      },
-      axisY: {
-        title: 'Price in USD',
-        prefix: '$'
-      },
-      data: [{
-        type: 'line',
-        xValueType: 'dateTime',
-        yValueFormatString: '$#,##0.00',
-        dataPoints: dataPoints
-      }]
+  useEffect(() => {
+    if (chart !== null) {
+      chart.render()
     }
-    console.log(options)
-    return (
+  })
+
+  return (
 		<div>
-			<CanvasJSChart options = {options}
-				 onRef={ref => { this.chart = ref } }
-			/>
+			<CanvasJSChart options={props.options} onRef={ref => { chart = ref } }/>
 			{/* You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods */}
 		</div>
-    )
-  }
+  )
+}
 
-  componentDidMount () {
-    const chart = this.chart
-    chart.render()
-  }
+Graph.propTypes = {
+  options: PropTypes.object
 }
 
 export default Graph
