@@ -1,54 +1,53 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-tabs */
 /* App.js */
-import {CanvasJSChart} from 'canvasjs-react-charts'
-var React = require('react');
-var Component = React.Component;
+import { CanvasJSChart } from 'canvasjs-react-charts'
+const React = require('react')
+const Component = React.Component
 
-var dataPoints =[];
 class Graph extends Component {
+  render () {
+    const dataPoints = []
+    this.props.graphData.forEach(val => {
+      const splitDate = val.x.split('-')
+      dataPoints.push({ y: val.y, x: new Date(splitDate[0], splitDate[1], splitDate[2]) })
+    })
 
-	render() {
-		const options = {
-			theme: "light2",
-			title: {
-				text: "Stock Price of NIFTY 50"
-			},
-			axisY: {
-				title: "Price in USD",
-				prefix: "$"
-			},
-			data: [{
-				type: "line",
-				xValueFormatString: "MMM YYYY",
-				yValueFormatString: "$#,##0.00",
-				dataPoints: dataPoints
-			}]
-		}
-		return (
+    const options = {
+      theme: 'light2',
+      title: {
+        text: 'Stock Price of NIFTY 50'
+      },
+      axisX: {
+        text: 'timeline',
+        gridThickness: 2
+      },
+      axisY: {
+        title: 'Price in USD',
+        prefix: '$'
+      },
+      data: [{
+        type: 'line',
+        xValueType: 'dateTime',
+        yValueFormatString: '$#,##0.00',
+        dataPoints: dataPoints
+      }]
+    }
+    console.log(options)
+    return (
 		<div>
 			<CanvasJSChart options = {options}
-				 onRef={ref => this.chart = ref}
+				 onRef={ref => { this.chart = ref } }
 			/>
-			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+			{/* You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods */}
 		</div>
-		);
-	}
+    )
+  }
 
-	componentDidMount(){
-		var chart = this.chart;
-		fetch('https://canvasjs.com/data/gallery/react/nifty-stock-price.json')
-		.then(function(response) {
-			return response.json();
-		})
-		.then(function(data) {
-			for (var i = 0; i < data.length; i++) {
-				dataPoints.push({
-					x: new Date(data[i].x),
-					y: data[i].y
-				});
-			}
-			chart.render();
-		});
-	}
+  componentDidMount () {
+    const chart = this.chart
+    chart.render()
+  }
 }
 
-export default Graph;
+export default Graph
