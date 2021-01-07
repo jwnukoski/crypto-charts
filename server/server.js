@@ -14,7 +14,6 @@ app.get('/api/graph/:coin/history/:time', (req, res) => {
   const time = req.params.time
 
   if (dailyCache.isCachedDataGood(`${coin}_${time}`)) {
-    console.log('sent from cache')
     res.status(200).send(dailyCache.getCachedData(`${coin}_${time}`))
   } else {
     axios.get('https://api.coindesk.com/v1/bpi/historical/close.json').then(response => {
@@ -28,9 +27,8 @@ app.get('/api/graph/:coin/history/:time', (req, res) => {
       }
 
       dailyCache.addToCache(`${coin}_${time}`, clientData)
-      console.log('saved to cache')
 
-      res.status(200).send(clientData)
+      res.status(200).send(dailyCache.getCachedData(`${coin}_${time}`))
     }).catch(err => {
       console.error(err)
     })
