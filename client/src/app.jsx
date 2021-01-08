@@ -26,8 +26,7 @@ function App () {
     }
   }
 
-  function cleanGraphData (data) {
-    // clean and prep for graphData
+  function cleanGraphData (data, niceName = '') {
     const formattedDataPoints = []
 
     data[period].forEach(row => {
@@ -40,7 +39,7 @@ function App () {
     setGraphOptions({
       theme: 'light2',
       title: {
-        text: `Stock Price of ${markets[selectedMarket].exchange}`
+        text: `${markets[selectedMarket].exchange}: ${niceName}`
       },
       axisX: {
         text: 'timeline',
@@ -59,15 +58,13 @@ function App () {
     })
   }
 
-  function getInfo (pair, market) {
-    console.log(`getInfo: ${pair} - ${market}`)
+  function getInfo (pair, market, niceName = '') {
     axios.get(`/api/info/${market}/${pair}/${currency}`).then(response => {
-      console.log('response: ', response)
       return response.data
     }).then(info => {
       console.log('info: ', info)
       setAssetPrice(info.price)
-      cleanGraphData(info.ohlc)
+      cleanGraphData(info.ohlc, niceName)
     }).catch(err => {
       console.error(err)
     })
@@ -101,6 +98,7 @@ function App () {
         </div>
         <div className="col-lg-8 col-md-6 col-sm-12 col-12">
           <Graph options={graphOptions}/>
+          <div className={styles.price}>{currency}: {assetPrice}</div>
         </div>
         <div className="col-lg-2 col-md-6 col-sm-12 col-12">
           <Assets markets={markets} selectedMarket={selectedMarket} getInfo={getInfo}/>

@@ -24,12 +24,13 @@ function Listing (props) {
   }
 
   function handleClick () {
-    props.getInfo(props.pair, props.market)
+    props.setSelectedAsset(props.index)
+    props.getInfo(props.pair, props.market, niceName)
   }
 
   useEffect(() => {
     getPairNiceName()
-  }, [props.pair, props.route])
+  }, [props.pair])
 
   return (
 		<div className={getListingStyle()} onClick={handleClick}>
@@ -47,7 +48,8 @@ Listing.propTypes = {
   setAsset: PropTypes.func,
   getInfo: PropTypes.func,
   market: PropTypes.string,
-  index: PropTypes.number
+  index: PropTypes.number,
+  setSelectedAsset: PropTypes.func
 }
 
 export default Listing
