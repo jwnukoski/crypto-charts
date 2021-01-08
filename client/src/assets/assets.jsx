@@ -5,24 +5,37 @@ import styles from './css/assets.module.css'
 import Listing from './listing.jsx'
 
 function Assets (props) {
+  function getList () {
+    if (props.markets.length > 0) {
+      return (
+        <div>
+          <h2>Assets for {props.markets[props.selectedMarket].exchange}</h2>
+          <div className={styles.assetsList}>
+            {
+              props.markets[props.selectedMarket].pairs.map((row, index) => {
+                return <Listing pair={row.pair} route={row.route} key={index}/>
+              })
+            }
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div></div>
+      )
+    }
+  }
+
   return (
 		<div className={styles.assetsWrapper}>
-      <h2>Assets</h2>
-      <div className={styles.assetsList}>
-        {
-          props.assets.map((row, index) => {
-            return <Listing data={row} index={index} key={index} selectedAsset={props.selectedAsset} setAsset={props.setAsset}/>
-          })
-        }
-      </div>
+      {getList()}
     </div>
   )
 }
 
 Assets.propTypes = {
-  assets: PropTypes.array,
-  selectedAsset: PropTypes.number,
-  setAsset: PropTypes.func
+  markets: PropTypes.array,
+  selectedMarket: PropTypes.number
 }
 
 export default Assets

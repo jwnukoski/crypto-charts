@@ -1,0 +1,8 @@
+.marketsWrapper {
+  padding: 0.5em;
+}
+
+.marketsList {
+  max-height: 80vh; /* or any value */
+  overflow-y: auto;
+}

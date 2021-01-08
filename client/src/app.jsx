@@ -3,18 +3,30 @@ import styles from './css/app.module.css'
 import Nav from './nav/nav.jsx'
 import Assets from './assets/assets.jsx'
 import Graph from './graph/graph.jsx'
+import Markets from './markets/markets.jsx'
 const conn = require('./connection.js')
 const axios = require('axios')
 
 function App () {
   // coins states
-  const [assets, setAssets] = useState(['BTC'])
+  const [assets, setAssets] = useState([])
   const [selectedAsset, setSelectedAsset] = useState(0)
   const [data, setData] = useState([])
   const [graphOptions, setGraphOptions] = useState({})
-  const [period, setPeriod] = useState(259200)
+  const [markets, setMarkets] = useState([])
+  const [selectedMarket, setSelectedMarket] = useState(0)
+  const [currency, setCurrency] = useState('usd')
+
+  // TODO:
+  const [period, setPeriod] = useState(604800)
   // 604800 1 week, 259200 3 days
   // https://docs.cryptowat.ch/rest-api/markets/ohlc
+
+  function setMarket (index) {
+    if (markets[index] !== undefined) {
+      setSelectedMarket(index)
+    }
+  }
 
   function setAsset (index) {
     if (assets[index] !== undefined) {
@@ -26,10 +38,10 @@ function App () {
   function cleanGraphData (data) {
     // clean and prep for graphData
     const formattedDataPoints = []
-    console.log(data)
 
     data[period].forEach(row => {
-      const closeTime = row[0]
+      // close time is in unix time
+      const closeTime = new Date(row[0] * 1000)
       const closePrice = row[4]
       formattedDataPoints.push({ x: closeTime, y: closePrice })
     })
@@ -56,13 +68,6 @@ function App () {
     })
   }
 
-  function getAssets () {
-    axios.get('/api/assets').then(response => {
-      setAssets(response.data.val)
-      return response.data.val
-    })
-  }
-
   function getInfo (asset) {
     axios.get(`/api/info/${asset}`).then(response => {
       setData(response.data.val)
@@ -76,19 +81,23 @@ function App () {
   }
 
   function getData (coin, time) {
-    axios.get('/api/graph/btc/history/all').then(response => {
-      setData(response.data)
+
+  }
+
+  function getMarkets () {
+    axios.get(`/api/markets/${currency}`).then(response => {
+      setMarkets(response.data.val)
       return response.data
-    }).then((data) => {
-      cleanGraphData(data)
+    }).then(() => {
+
     }).catch(err => {
       console.error(err)
     })
   }
 
   useEffect(() => {
-    getAssets()
-    getData()
+    getMarkets()
+    //getData()
   }, [])
 
   return (
@@ -100,10 +109,13 @@ function App () {
       </div>
       <div className="row">
         <div className="col-lg-2 col-md-12 col-sm-12 col-12">
-          <Assets assets={assets} selectedAsset={selectedAsset} setAsset={setAsset}/>
+          <Markets markets={markets} selectedMarket={selectedMarket} setMarket={setMarket}/>
         </div>
-        <div className="col-lg-10 col-md-12 col-sm-12 col-12">
+        <div className="col-lg-8 col-md-6 col-sm-12 col-12">
           <Graph options={graphOptions}/>
+        </div>
+        <div className="col-lg-2 col-md-6 col-sm-12 col-12">
+          <Assets markets={markets} selectedMarket={selectedMarket}/>
         </div>
       </div>
     </div>

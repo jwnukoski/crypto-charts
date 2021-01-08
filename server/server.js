@@ -42,19 +42,46 @@ app.get('/api/graph/:coin/history/:time', (req, res) => {
   })
 })
 
-app.get('/api/assets', (req, res) => {
-  getCacheOrQueryThenSend('https://api.cryptowat.ch/assets', 'assets', res, data => {
-    let assets = data.data.result
+app.get('/api/pairinfo/:pair', (req, res) => {
+  const pair = req.params.pair
 
-    // git rid of some fields
-    assets = assets.map(row => {
-      return { orig_id: row.id, symbol: row.symbol, name: row.name }
+  getCacheOrQueryThenSend(`https://api.cryptowat.ch/pairs/${pair}`, `pairinfo_${pair}`, res, data => {
+    const row = data.data.result.base
+    return { name: row.name, symbol: row.symbol }
+  })
+})
+
+app.get('/api/markets/:currency', (req, res) => {
+  const currency = req.params.currency
+  console.log(currency)
+
+  getCacheOrQueryThenSend('https://api.cryptowat.ch/markets', 'markets', res, data => {
+    const marketsObj = {}
+
+    // condense and prevent duplicate exchange names
+    data.data.result.forEach(row => {
+      // only add if it contains currency
+      if (row.pair.search(currency) >= 0) {
+        const pair = { pair: row.pair, route: row.route }
+
+        if (marketsObj[row.exchange] === undefined) {
+          marketsObj[row.exchange] = [pair]
+        } else {
+          marketsObj[row.exchange].push(pair)
+        }
+      }
     })
 
-    // alphabatize and return
-    return assets.sort((a, b) => {
-      const smybolA = a.symbol.toUpperCase()
-      const smybolB = b.symbol.toUpperCase()
+    // turn into an array
+    const marketsArr = []
+    for (const key in marketsObj) {
+      marketsArr.push({ exchange: key, pairs: marketsObj[key] })
+    }
+
+    // sort alphabetically
+    return marketsArr.sort((a, b) => {
+      const smybolA = a.exchange.toUpperCase()
+      const smybolB = b.exchange.toUpperCase()
 
       if (smybolA < smybolB) {
         return -1
