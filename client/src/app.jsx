@@ -1,34 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import styles from './css/app.module.css'
 import Nav from './nav/nav.jsx'
-import Coins from './coins/coins.jsx'
+import Assets from './assets/assets.jsx'
 import Graph from './graph/graph.jsx'
-
+import Markets from './markets/markets.jsx'
 const conn = require('./connection.js')
 const axios = require('axios')
 
 function App () {
   // coins states
-  const [coins, setCoins] = useState(['BTC'])
-  const [selectedCoin, setSelectedCoin] = useState([0])
-
-  // graph states
-  const [data, setData] = useState([]) // raw return from server
   const [graphOptions, setGraphOptions] = useState({})
+  const [markets, setMarkets] = useState([])
+  const [selectedMarket, setSelectedMarket] = useState(0)
+  const [currency, setCurrency] = useState('usd')
+  const [assetPrice, setAssetPrice] = useState(0)
 
-  function cleanGraphData (data) {
-    // clean and prep for graphData
+  // TODO:
+  const [period, setPeriod] = useState(604800)
+  // 604800 1 week, 259200 3 days
+  // https://docs.cryptowat.ch/rest-api/markets/ohlc
+
+  function setMarket (index) {
+    if (markets[index] !== undefined) {
+      setSelectedMarket(index)
+    }
+  }
+
+  function cleanGraphData (data, niceName = '') {
     const formattedDataPoints = []
 
-    data.val.forEach(val => {
-      const splitDate = val.x.split('-')
-      formattedDataPoints.push({ y: val.y, x: new Date(splitDate[0], splitDate[1], splitDate[2]) })
+    data[period].forEach(row => {
+      // close time is in unix time
+      const closeTime = new Date(row[0] * 1000)
+      const closePrice = row[4]
+      formattedDataPoints.push({ x: closeTime, y: closePrice })
     })
 
     setGraphOptions({
       theme: 'light2',
       title: {
-        text: `Stock Price of ${coins[selectedCoin]}`
+        text: `${markets[selectedMarket].exchange}: ${niceName}`
       },
       axisX: {
         text: 'timeline',
@@ -47,19 +58,31 @@ function App () {
     })
   }
 
-  function getData (coin, time) {
-    axios.get('/api/graph/btc/history/all').then(response => {
-      setData(response.data)
+  function getInfo (pair, market, niceName = '') {
+    axios.get(`/api/info/${market}/${pair}/${currency}`).then(response => {
       return response.data
-    }).then((data) => {
-      cleanGraphData(data)
+    }).then(info => {
+      console.log('info: ', info)
+      setAssetPrice(info.price)
+      cleanGraphData(info.ohlc, niceName)
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  function getMarkets () {
+    axios.get(`/api/markets/${currency}`).then(response => {
+      setMarkets(response.data.val)
+      return response.data
+    }).then(() => {
+
     }).catch(err => {
       console.error(err)
     })
   }
 
   useEffect(() => {
-    getData()
+    getMarkets()
   }, [])
 
   return (
@@ -71,10 +94,14 @@ function App () {
       </div>
       <div className="row">
         <div className="col-lg-2 col-md-12 col-sm-12 col-12">
-          <Coins coins={coins} setSelectedCoin={setSelectedCoin}/>
+          <Markets markets={markets} selectedMarket={selectedMarket} setMarket={setMarket}/>
         </div>
-        <div className="col-lg-10 col-md-12 col-sm-12 col-12">
+        <div className="col-lg-8 col-md-6 col-sm-12 col-12">
           <Graph options={graphOptions}/>
+          <div className={styles.price}>{currency}: {assetPrice}</div>
+        </div>
+        <div className="col-lg-2 col-md-6 col-sm-12 col-12">
+          <Assets markets={markets} selectedMarket={selectedMarket} getInfo={getInfo}/>
         </div>
       </div>
     </div>

@@ -1,0 +1,8 @@
+.assetsWrapper {
+  padding: 0.5em;
+}
+
+.assetsList {
+  max-height: 40vh; /* or any value */
+  overflow-y: auto;
+}

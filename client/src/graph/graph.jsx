@@ -12,12 +12,11 @@ function Graph (props) {
     if (chart !== null) {
       chart.render()
     }
-  })
+  }, [props.options])
 
   return (
-		<div>
+		<div className="graphWrapper">
 			<CanvasJSChart options={props.options} onRef={ref => { chart = ref } }/>
-			{/* You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods */}
 		</div>
   )
 }

@@ -4,7 +4,9 @@ import styles from './css/nav.module.css'
 
 function Nav () {
   return (
-		<div>Crypto-Charts</div>
+    <div className={styles.navWrapper}>
+      <span className={styles.branding}>Crypto-Charts</span>
+    </div>
   )
 }
 
