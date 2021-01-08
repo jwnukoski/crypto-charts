@@ -3,6 +3,7 @@
 }
 
 .marketsList {
-  max-height: 80vh; /* or any value */
+  max-height: 40vh; /* or any value */
   overflow-y: auto;
+  overflow-x: hidden;
 }

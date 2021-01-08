@@ -1,7 +1,8 @@
 .navWrapper {
-  min-height: 2em;
+  min-height: 1em;
   padding: 1em;
   margin-bottom: 1em;
+  border-bottom: 1px solid lightgrey;
 }
 
 .branding {
