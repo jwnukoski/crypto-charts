@@ -53,7 +53,6 @@ app.get('/api/pairinfo/:pair', (req, res) => {
 
 app.get('/api/markets/:currency', (req, res) => {
   const currency = req.params.currency
-  console.log(currency)
 
   getCacheOrQueryThenSend('https://api.cryptowat.ch/markets', 'markets', res, data => {
     const marketsObj = {}
@@ -96,16 +95,21 @@ app.get('/api/markets/:currency', (req, res) => {
   })
 })
 
-app.get('/api/info/:asset', (req, res) => {
+app.get('/api/info/:market/:asset/:currency', (req, res) => {
   // currently only supporting USD and binance
   const asset = req.params.asset
-  const currency = 'usd'
-  const market = 'binance-us'
+  const market = req.params.market
   const coinInfo = {}
 
   const baseApiEndpoint = 'https://api.cryptowat.ch/markets'
-  const priceApiEndpoint = `${baseApiEndpoint}/${market}/${asset}${currency}/price`
-  const ohlcApiEndpoint = `${baseApiEndpoint}/${market}/${asset}${currency}/ohlc`
+  const priceApiEndpoint = `${baseApiEndpoint}/${market}/${asset}/price`
+  const ohlcApiEndpoint = `${baseApiEndpoint}/${market}/${asset}/ohlc`
+
+  // TODO: try using getCacheOrQueryThenSend here
+  // if (dailyCache.isCachedDataGood(`info_${asset}_${market}`)) {
+  //   res.status(200).send(dailyCache.getCachedData(`info_${asset}_${market}`))
+  //   return
+  // }
 
   axios.get(priceApiEndpoint).then(priceResponse => {
     // get price
@@ -128,9 +132,9 @@ app.get('/api/info/:asset', (req, res) => {
   }).then(ohlcData => {
     // save to cache and send to client
     coinInfo.ohlc = ohlcData
-    dailyCache.addToCache(`info_${asset}`, coinInfo)
-
-    res.status(200).send(dailyCache.getCachedData(`info_${asset}`))
+    //dailyCache.addToCache(`info_${asset}`, coinInfo)
+    //res.status(200).send(dailyCache.getCachedData(`info_${asset}_${market}`))
+    res.status(200).send(coinInfo)
   }).catch(err => {
     console.error(`Error in /api/info/asset: ${err}`)
     res.status(401).send(err)

@@ -11,7 +11,6 @@ function Markets (props) {
       <div className={styles.marketsList}>
         {
           props.markets.map((row, index) => {
-            console.log(row)
             return <Listing data={row} index={index} key={index} selectedMarket={props.selectedMarket} setMarket={props.setMarket}/>
           })
         }

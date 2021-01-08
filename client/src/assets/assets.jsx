@@ -5,15 +5,19 @@ import styles from './css/assets.module.css'
 import Listing from './listing.jsx'
 
 function Assets (props) {
+  const [selectedAsset, setSelectedAsset] = useState(0)
+
   function getList () {
+    const market = props.markets[props.selectedMarket]
+
     if (props.markets.length > 0) {
       return (
         <div>
-          <h2>Assets for {props.markets[props.selectedMarket].exchange}</h2>
+          <h2>Assets for {market.exchange}</h2>
           <div className={styles.assetsList}>
             {
-              props.markets[props.selectedMarket].pairs.map((row, index) => {
-                return <Listing pair={row.pair} route={row.route} key={index}/>
+              market.pairs.map((row, index) => {
+                return <Listing pair={row.pair} route={row.route} index={index} key={index} market={market.exchange} getInfo={props.getInfo} selectedAsset={selectedAsset} setSelectedAsset={setSelectedAsset}/>
               })
             }
           </div>
@@ -35,7 +39,8 @@ function Assets (props) {
 
 Assets.propTypes = {
   markets: PropTypes.array,
-  selectedMarket: PropTypes.number
+  selectedMarket: PropTypes.number,
+  getInfo: PropTypes.func
 }
 
 export default Assets

@@ -9,13 +9,11 @@ const axios = require('axios')
 
 function App () {
   // coins states
-  const [assets, setAssets] = useState([])
-  const [selectedAsset, setSelectedAsset] = useState(0)
-  const [data, setData] = useState([])
   const [graphOptions, setGraphOptions] = useState({})
   const [markets, setMarkets] = useState([])
   const [selectedMarket, setSelectedMarket] = useState(0)
   const [currency, setCurrency] = useState('usd')
+  const [assetPrice, setAssetPrice] = useState(0)
 
   // TODO:
   const [period, setPeriod] = useState(604800)
@@ -25,13 +23,6 @@ function App () {
   function setMarket (index) {
     if (markets[index] !== undefined) {
       setSelectedMarket(index)
-    }
-  }
-
-  function setAsset (index) {
-    if (assets[index] !== undefined) {
-      setSelectedAsset(index)
-      getInfo(assets[index].symbol)
     }
   }
 
@@ -49,7 +40,7 @@ function App () {
     setGraphOptions({
       theme: 'light2',
       title: {
-        text: `Stock Price of ${assets[selectedAsset].name}`
+        text: `Stock Price of ${markets[selectedMarket].exchange}`
       },
       axisX: {
         text: 'timeline',
@@ -68,20 +59,18 @@ function App () {
     })
   }
 
-  function getInfo (asset) {
-    axios.get(`/api/info/${asset}`).then(response => {
-      setData(response.data.val)
-      return response.data.val
+  function getInfo (pair, market) {
+    console.log(`getInfo: ${pair} - ${market}`)
+    axios.get(`/api/info/${market}/${pair}/${currency}`).then(response => {
+      console.log('response: ', response)
+      return response.data
     }).then(info => {
-      // price = info.price
+      console.log('info: ', info)
+      setAssetPrice(info.price)
       cleanGraphData(info.ohlc)
     }).catch(err => {
       console.error(err)
     })
-  }
-
-  function getData (coin, time) {
-
   }
 
   function getMarkets () {
@@ -97,7 +86,6 @@ function App () {
 
   useEffect(() => {
     getMarkets()
-    //getData()
   }, [])
 
   return (
@@ -115,7 +103,7 @@ function App () {
           <Graph options={graphOptions}/>
         </div>
         <div className="col-lg-2 col-md-6 col-sm-12 col-12">
-          <Assets markets={markets} selectedMarket={selectedMarket}/>
+          <Assets markets={markets} selectedMarket={selectedMarket} getInfo={getInfo}/>
         </div>
       </div>
     </div>
