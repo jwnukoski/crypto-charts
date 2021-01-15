@@ -105,40 +105,37 @@ app.get('/api/info/:market/:asset/:currency', (req, res) => {
   const priceApiEndpoint = `${baseApiEndpoint}/${market}/${asset}/price`
   const ohlcApiEndpoint = `${baseApiEndpoint}/${market}/${asset}/ohlc`
 
-  // TODO: try using getCacheOrQueryThenSend here
-  // if (dailyCache.isCachedDataGood(`info_${asset}_${market}`)) {
-  //   res.status(200).send(dailyCache.getCachedData(`info_${asset}_${market}`))
-  //   return
-  // }
 
-  axios.get(priceApiEndpoint).then(priceResponse => {
-    // get price
-    if (priceResponse.data.result === undefined) {
-      throw new Error(`Error getting price for ${asset} at ${market}.`)
-    }
+  if (dailyCache.isCachedDataGood(`info_${asset}_${market}`)) {
+    res.status(200).send(dailyCache.getCachedData(`info_${asset}_${market}`))
+  } else {
+    axios.get(priceApiEndpoint).then(priceResponse => {
+      // price
+      if (priceResponse.data.result === undefined) {
+        throw new Error(`Error getting price for ${asset} at ${market}.`)
+      }
 
-    return priceResponse.data.result.price
-  }).then(price => {
-    coinInfo.price = price
+      return priceResponse.data.result.price
+    }).then(price => {
+      coinInfo.price = price
+      return axios.get(ohlcApiEndpoint)
+    }).then(ohlcResponse => {
+      // ohlc candlesticks
+      if (ohlcResponse.data.result === undefined) {
+        throw new Error(`Error getting OHLC for ${asset} at ${market}.`)
+      }
 
-    return axios.get(ohlcApiEndpoint)
-  }).then(ohlcResponse => {
-    // get ohlc candlesticks
-    if (ohlcResponse.data.result === undefined) {
-      throw new Error(`Error getting OHLC for ${asset} at ${market}.`)
-    }
-
-    return ohlcResponse.data.result
-  }).then(ohlcData => {
-    // save to cache and send to client
-    coinInfo.ohlc = ohlcData
-    //dailyCache.addToCache(`info_${asset}`, coinInfo)
-    //res.status(200).send(dailyCache.getCachedData(`info_${asset}_${market}`))
-    res.status(200).send(coinInfo)
-  }).catch(err => {
-    console.error(`Error in /api/info/asset: ${err}`)
-    res.status(401).send(err)
-  })
+      return ohlcResponse.data.result
+    }).then(ohlcData => {
+      // cache and respond
+      coinInfo.ohlc = ohlcData
+      dailyCache.addToCache(`info_${asset}_${market}`, coinInfo)
+      res.status(200).send(dailyCache.getCachedData(`info_${asset}_${market}`))
+    }).catch(err => {
+      console.error(`Error in /api/info/asset: ${err}`)
+      res.status(401).send(err)
+    })
+  }
 })
 
 app.listen(conn.expressPort, () => {

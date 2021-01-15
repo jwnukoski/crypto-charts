@@ -62,9 +62,8 @@ function App () {
     axios.get(`/api/info/${market}/${pair}/${currency}`).then(response => {
       return response.data
     }).then(info => {
-      console.log('info: ', info)
-      setAssetPrice(info.price)
-      cleanGraphData(info.ohlc, niceName)
+      setAssetPrice(info.val.price)
+      cleanGraphData(info.val.ohlc, niceName)
     }).catch(err => {
       console.error(err)
     })
