@@ -4,6 +4,13 @@ import React, { useState, useEffect } from 'react'
 import styles from './css/assets.module.css'
 import Listing from './listing.jsx'
 
+/**
+ * Represents all the available assets ('ie coins') for the selected market.
+ * @param {object} props - The react props.
+ * @param {array} - The available markets.
+ * @param {number} - The user selected index relating to props.markets.
+ * @param {function} props.getInfo - The function that is called after selecting an asset, which gets the asset info. Passed down to the asset calling upon clicking.
+ */
 function Assets (props) {
   const [selectedAsset, setSelectedAsset] = useState(0)
 
