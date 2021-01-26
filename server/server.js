@@ -1,5 +1,6 @@
 const cache = require('./cache.js')
 const express = require('express')
+const compression = require('compression')
 const app = express()
 const path = require('path')
 const conn = require('./connection.js')
@@ -23,6 +24,7 @@ function getCacheOrQueryThenSend (apiUrl, key, res, dataMunipulatorCallback) {
   }
 }
 
+app.use(compression())
 app.use(express.static(path.join(__dirname, '../client/dist')))
 
 app.get('/api/graph/:coin/history/:time', (req, res) => {
