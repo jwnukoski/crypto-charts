@@ -10,6 +10,8 @@ There is currently jsdoc generated documentation available for the React client 
 ## Technologies
 - React
 	- Client
+- Chart.js
+	- For displaying crypto historical prices
 - Express
 	- Server
 	- Compression npm package for making responses smaller
