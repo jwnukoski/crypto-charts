@@ -1,5 +1,6 @@
 # crypto-charts
-A single-page app for viewing the historical price data for cryptocurrencies.
+A single-page app for viewing the historical price data for cryptocurrencies.  
+![Preview of crypto-charts](https://i.imgur.com/9nMFCAn.gif "crypto-charts Demo")
 
 ## API
 This app uses https://docs.cryptowat.ch/rest-api/. It is free, however it has a limited amount of requests per day. This is why a server-side daily cache has been implemented. The larger a user base grows, the more this will need improved.
