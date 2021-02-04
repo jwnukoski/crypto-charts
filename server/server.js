@@ -3,7 +3,6 @@ const express = require('express')
 const compression = require('compression')
 const app = express()
 const path = require('path')
-const conn = require('./connection.js')
 const axios = require('axios')
 
 const dailyCache = new cache.DailyCache()
@@ -121,6 +120,6 @@ app.get('/api/info/:market/:asset/:currency', (req, res) => {
   }
 })
 
-app.listen(conn.expressPort, () => {
-  console.log(`App listening on ${conn.expressPort}`)
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server started on ${process.env.PORT || 3000}`)
 })
