@@ -25,9 +25,6 @@ There is currently jsdoc generated documentation available for the React client 
 - jsdoc
 	- For documentation
 
-## TODO
-- Loading screen for users. Especially during a uncached response.
-
 ## Endpoints
 ### /api/graph/:coin/history/:time
 Returns the history for the asset.  
