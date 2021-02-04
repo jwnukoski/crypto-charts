@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: spinner/spinner.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,35 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: spinner/spinner.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react'
+import styles from './css/spinner.module.css'
 
+/**
+ * Represents the loading spinner
+ * @constructor
+ */
+function Spinner () {
+  return (
+    &lt;div className={styles.spinnerOverlay}>
+        &lt;img src="spinner.gif" alt="loading spinner" className={styles.spinner}>&lt;/img>
+        &lt;span className={styles.loadingTxt}>Loading...&lt;/span>
+    &lt;/div>
+  )
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default Spinner
+</code></pre>
+        </article>
+    </section>
 
 
 
