@@ -4,11 +4,11 @@
   "description": "A single-page app for viewing the historical price data for any cryptocurrency.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p",
     "client": "webpack --watch",
     "server": "node server/server.js",
     "server-dev": "nodemon server/server.js",
-    "test": "jest"
+    "test": "jest",
+    "start": "webpack"
   },
   "repository": {
     "type": "git",
