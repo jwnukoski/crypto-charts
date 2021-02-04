@@ -84,8 +84,6 @@ app.get('/api/info/:market/:asset/:currency', (req, res) => {
   const asset = req.params.asset
   const market = req.params.market
   const coinInfo = {}
-  console.log('asset: ', asset)
-  console.log('market: ', market)
 
   const baseApiEndpoint = 'https://api.cryptowat.ch/markets'
   const priceApiEndpoint = `${baseApiEndpoint}/${market}/${asset}/price`
