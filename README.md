@@ -24,6 +24,9 @@ There is currently jsdoc generated documentation available for the React client 
 	- Standard styling
 - jsdoc
 	- For documentation
+- Jest & Enzyme
+	- For testing
+	- supertest included for HTTP assertion
 
 ## Endpoints
 ### /api/pairinfo/:pair
