@@ -4,6 +4,7 @@ import Nav from './nav/nav.jsx'
 import Assets from './assets/assets.jsx'
 import Graph from './graph/graph.jsx'
 import Markets from './markets/markets.jsx'
+import Spinner from './spinner/spinner.jsx'
 const axios = require('axios')
 
 /**
@@ -16,6 +17,7 @@ function App () {
   const [selectedMarket, setSelectedMarket] = useState(0)
   const [currency, setCurrency] = useState('usd')
   const [assetPrice, setAssetPrice] = useState(0)
+  const [displayLoadingSpinner, setDisplayLoadingSpinner] = useState(false)
 
   // TODO: Implement different periods for graph data.
   const [period, setPeriod] = useState(604800)
@@ -76,13 +78,17 @@ function App () {
    * @param {string} niceName - Passed to cleanGraphData for the Graph title.
    */
   function getInfo (pair, market, niceName = '') {
+    setDisplayLoadingSpinner(true)
+
     axios.get(`/api/info/${market}/${pair}/${currency}`).then(response => {
       return response.data
     }).then(info => {
       setAssetPrice(info.val.price)
       cleanGraphData(info.val.ohlc, niceName)
+      setDisplayLoadingSpinner(false)
     }).catch(err => {
       console.error(err)
+      setDisplayLoadingSpinner(false)
     })
   }
 
@@ -90,12 +96,28 @@ function App () {
    * Fetches all available markets for the 'currency' state.
    */
   function getMarkets () {
+    setDisplayLoadingSpinner(true)
+
     axios.get(`/api/markets/${currency}`).then(response => {
       setMarkets(response.data.val)
+      setDisplayLoadingSpinner(false)
       return response.data
     }).catch(err => {
+      setDisplayLoadingSpinner(false)
       console.error(err)
     })
+  }
+
+  /**
+   * Returns the loading spinner if the state 'displayLoadingSpinner' is set to true.
+   * @param {boolean} status - The React state 'displayLoadingSpinner'
+   */
+  function getLoadingSpinner () {
+    if (displayLoadingSpinner) {
+      return <Spinner displayLoadingSpinner={displayLoadingSpinner}/>
+    } else {
+      return <span></span>
+    }
   }
 
   /**
@@ -107,6 +129,7 @@ function App () {
 
   return (
     <div className="container-fluid">
+      {getLoadingSpinner()}
       <div className="row">
         <div className="col-12">
           <Nav/>
