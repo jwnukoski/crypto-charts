@@ -1,0 +1,23 @@
+.spinnerOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    padding-top: 40vh;
+    z-index: 1000;
+    background-color: rgba(150, 150, 150, 0.7);
+}
+
+.spinner {
+    width: 4em;
+    height: auto;
+}
+
+.loadingTxt {
+    display: block;
+    text-align: center;
+    font-size: 2em;
+    padding: 1em;
+}
