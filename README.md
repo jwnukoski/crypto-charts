@@ -30,9 +30,32 @@ There is currently jsdoc generated documentation available for the React client 
 
 ## Endpoints
 ### /api/graph/:coin/history/:time
+Returns the history for the asset.  
+If a request has been made for the same day, then cached data will be sent back.  
+
+#### Params:  
+- .coin
+- .time
 
 ### /api/pairinfo/:pair
+Returns the pair name and symbol.  
+If a request has been made for the same day, then cached data will be sent back. 
+
+#### Params:  
+- .pair
 
 ### /api/markets/:currency
+Returns the available markets for a given currency. USD is only supported at the moment.    
+If a request has been made for the same day, then cached data will be sent back. 
+
+#### Params:  
+- .currency
 
 ### /api/info/:market/:asset/:currency
+Returns the price and historical (OHLC Candlesticks) for a given asset, so it can be graphed.      
+If a request has been made for the same day, then cached data will be sent back. 
+
+#### Params:  
+- .market
+- .asset
+- .currency

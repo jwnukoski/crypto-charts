@@ -31,7 +31,6 @@ app.get('/api/graph/:coin/history/:time', (req, res) => {
   const coin = req.params.coin
   const time = req.params.time
 
-  // bitcoin only atm
   getCacheOrQueryThenSend('https://api.coindesk.com/v1/bpi/historical/close.json', `graph_${coin}_${time}`, res, data => {
     const clientData = []
     for (const key in data.data.bpi) {
@@ -98,7 +97,6 @@ app.get('/api/markets/:currency', (req, res) => {
 })
 
 app.get('/api/info/:market/:asset/:currency', (req, res) => {
-  // currently only supporting USD and binance
   const asset = req.params.asset
   const market = req.params.market
   const coinInfo = {}
