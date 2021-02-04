@@ -1,0 +1,15 @@
+arch:
+  - amd64
+
+language: node_js
+
+node_js:
+    - "stable"
+
+install:
+    - npm install
+
+before_script:
+  - npm run build
+  - (npm run server&)
+  - sleep 5

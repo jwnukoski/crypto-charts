@@ -27,22 +27,6 @@ function getCacheOrQueryThenSend (apiUrl, key, res, dataMunipulatorCallback) {
 app.use(compression())
 app.use(express.static(path.join(__dirname, '../client/dist')))
 
-app.get('/api/graph/:coin/history/:time', (req, res) => {
-  const coin = req.params.coin
-  const time = req.params.time
-
-  getCacheOrQueryThenSend('https://api.coindesk.com/v1/bpi/historical/close.json', `graph_${coin}_${time}`, res, data => {
-    const clientData = []
-    for (const key in data.data.bpi) {
-      clientData.push({
-        y: data.data.bpi[key],
-        x: key
-      })
-    }
-    return clientData
-  })
-})
-
 app.get('/api/pairinfo/:pair', (req, res) => {
   const pair = req.params.pair
 
@@ -100,11 +84,12 @@ app.get('/api/info/:market/:asset/:currency', (req, res) => {
   const asset = req.params.asset
   const market = req.params.market
   const coinInfo = {}
+  console.log('asset: ', asset)
+  console.log('market: ', market)
 
   const baseApiEndpoint = 'https://api.cryptowat.ch/markets'
   const priceApiEndpoint = `${baseApiEndpoint}/${market}/${asset}/price`
   const ohlcApiEndpoint = `${baseApiEndpoint}/${market}/${asset}/ohlc`
-
 
   if (dailyCache.isCachedDataGood(`info_${asset}_${market}`)) {
     res.status(200).send(dailyCache.getCachedData(`info_${asset}_${market}`))

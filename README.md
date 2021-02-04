@@ -26,14 +26,6 @@ There is currently jsdoc generated documentation available for the React client 
 	- For documentation
 
 ## Endpoints
-### /api/graph/:coin/history/:time
-Returns the history for the asset.  
-If a request has been made for the same day, then cached data will be sent back.  
-
-#### Params:  
-- .coin
-- .time
-
 ### /api/pairinfo/:pair
 Returns the pair name and symbol.  
 If a request has been made for the same day, then cached data will be sent back. 
