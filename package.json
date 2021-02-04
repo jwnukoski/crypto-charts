@@ -8,8 +8,7 @@
     "client": "webpack --watch",
     "server": "node server/server.js",
     "server-dev": "nodemon server/server.js",
-    "test": "jest",
-    "start": "(npm run build) && (npm run server&)"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
