@@ -25,8 +25,10 @@ There is currently jsdoc generated documentation available for the React client 
 - jsdoc
 	- For documentation
 - Jest & Enzyme
-	- For testing
+	- Unit/End-to-End testing
 	- supertest included for HTTP assertion
+- Travis-CI
+	- Integration tests
 
 ## Endpoints
 ### /api/pairinfo/:pair
