@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 class DailyCache {
   constructor () {
-    this.db = mongoose.connect('mongodb://localhost/crypto-charts', { useNewUrlParser: true, useUnifiedTopology: true })
+    this.db = mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/crypto-charts', { useNewUrlParser: true, useUnifiedTopology: true })
 
     this.cacheSchema = new mongoose.Schema({
       key: {

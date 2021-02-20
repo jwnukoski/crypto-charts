@@ -2,7 +2,7 @@ import { CanvasJSChart } from 'canvasjs-react-charts'
 import React, { useEffect } from 'react'
 
 type graphProps = {
-  options: any;
+  options: object;
 }
 
 /**
