@@ -52,9 +52,9 @@ function Assets (props: assetsProps) {
   }
 
   return (
-		<div className={styles.assetsWrapper}>
-      {getList()}
-    </div>
+  <div className={styles.assetsWrapper}>
+    {getList()}
+  </div>
   )
 }
 

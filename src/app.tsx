@@ -16,7 +16,7 @@ function App () {
     pair: string;
     route: string;
   }
-  
+
   interface market {
     exchange: string;
     pairs: pair[];

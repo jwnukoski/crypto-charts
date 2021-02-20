@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './css/nav.module.css'
 
 /**
@@ -6,9 +7,9 @@ import styles from './css/nav.module.css'
  */
 function Nav () {
   return (
-    <div className={styles.navWrapper}>
-      <span className={styles.branding}>Crypto-Charts</span>
-    </div>
+  <div className={styles.navWrapper}>
+    <span className={styles.branding}>Crypto-Charts</span>
+  </div>
   )
 }
 

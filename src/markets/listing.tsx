@@ -29,9 +29,9 @@ function Listing (props: listingProps) {
   }
 
   return (
-		<div className={getListingStyle()} onClick={handleClick}>
-      <div className={styles.listExchange}>{props.data.exchange}</div>
-    </div>
+  <div className={getListingStyle()} onClick={handleClick}>
+    <div className={styles.listExchange}>{props.data.exchange}</div>
+  </div>
   )
 }
 
