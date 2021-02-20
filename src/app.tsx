@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styles from './css/app.module.css'
-import Nav from './nav/nav.jsx'
-import Assets from './assets/assets.jsx'
-import Graph from './graph/graph.jsx'
-import Markets from './markets/markets.jsx'
-import Spinner from './spinner/spinner.jsx'
+import Nav from './nav/nav'
+import Assets from './assets/assets'
+import Graph from './graph/graph'
+import Markets from './markets/markets'
+import Spinner from './spinner/spinner'
 const axios = require('axios')
 
 /**
@@ -12,15 +12,25 @@ const axios = require('axios')
  * @constructor
  */
 function App () {
+  type pair = {
+    pair: string;
+    route: string;
+  }
+  
+  interface market {
+    exchange: string;
+    pairs: pair[];
+  }
+
   const [graphOptions, setGraphOptions] = useState({})
-  const [markets, setMarkets] = useState([])
+  const [markets, setMarkets] = useState<market[]>([])
   const [selectedMarket, setSelectedMarket] = useState(0)
-  const [currency, setCurrency] = useState('usd')
+  const [currency] = useState('usd')
   const [assetPrice, setAssetPrice] = useState(0)
   const [displayLoadingSpinner, setDisplayLoadingSpinner] = useState(false)
 
   // TODO: Implement different periods for graph data.
-  const [period, setPeriod] = useState(604800)
+  const [period] = useState(604800)
   // 604800 1 week, 259200 3 days
   // https://docs.cryptowat.ch/rest-api/markets/ohlc
 
@@ -28,10 +38,15 @@ function App () {
    * Set the market for the user. This should also updates the currencies available to the user.
    * @param {number} index - The index of the market on https://docs.cryptowat.ch/rest-api/markets
    */
-  function setMarket (index) {
+  function setMarket (index: number) {
     if (markets[index] !== undefined) {
       setSelectedMarket(index)
     }
+  }
+
+  type datePoint = {
+    x: Date;
+    y: Date;
   }
 
   /**
@@ -39,10 +54,10 @@ function App () {
    * @param {array} data - This should be the OHLC candlestick data, or whatever data you want to be graphed.
    * @param {string} niceName - Title for the graph
    */
-  function cleanGraphData (data, niceName = '') {
-    const formattedDataPoints = []
+  function cleanGraphData (data: any, niceName = '') {
+    const formattedDataPoints: Array<datePoint> = []
 
-    data[period].forEach(row => {
+    data[period].forEach((row: any) => {
       // close time is in unix time
       const closeTime = new Date(row[0] * 1000)
       const closePrice = row[4]
@@ -77,16 +92,16 @@ function App () {
    * @param {string} market - See: https://docs.cryptowat.ch/rest-api/markets
    * @param {string} niceName - Passed to cleanGraphData for the Graph title.
    */
-  function getInfo (pair, market, niceName = '') {
+  function getInfo (pair: string, market: string, niceName = '') {
     setDisplayLoadingSpinner(true)
 
-    axios.get(`/api/info/${market}/${pair}/${currency}`).then(response => {
+    axios.get(`/api/info/${market}/${pair}/${currency}`).then((response: any) => {
       return response.data
-    }).then(info => {
+    }).then((info: any) => {
       setAssetPrice(info.val.price)
       cleanGraphData(info.val.ohlc, niceName)
       setDisplayLoadingSpinner(false)
-    }).catch(err => {
+    }).catch((err: string) => {
       console.error(err)
       setDisplayLoadingSpinner(false)
     })
@@ -98,11 +113,11 @@ function App () {
   function getMarkets () {
     setDisplayLoadingSpinner(true)
 
-    axios.get(`/api/markets/${currency}`).then(response => {
+    axios.get(`/api/markets/${currency}`).then((response: any) => {
       setMarkets(response.data.val)
       setDisplayLoadingSpinner(false)
       return response.data
-    }).catch(err => {
+    }).catch((err: string) => {
       setDisplayLoadingSpinner(false)
       console.error(err)
     })
