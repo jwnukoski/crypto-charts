@@ -1,38 +1,56 @@
+const mongoose = require('mongoose')
+
 class DailyCache {
   constructor () {
-    this.cache = {}
+    this.db = mongoose.connect('mongodb://localhost/crypto-charts', { useNewUrlParser: true, useUnifiedTopology: true })
+
+    this.cacheSchema = new mongoose.Schema({
+      key: {
+        type: String,
+        index: true,
+        unique: true
+      },
+      date: String,
+      val: mongoose.Mixed
+    })
+
+    this.CacheModel = mongoose.model('cache', this.cacheSchema)
   }
 
   getDate () {
     const dateObj = new Date()
-    const month = String(dateObj.getUTCMonth() + 1)
-    const day = String(dateObj.getUTCDate())
-    const year = String(dateObj.getUTCFullYear())
-
-    return `${year}/${month}/${day}`
+    return `${String(dateObj.getUTCFullYear())}
+    /${String(dateObj.getUTCMonth() + 1)}
+    /${String(dateObj.getUTCDate())}`
   }
 
   addToCache (key, val, date = this.getDate()) {
-    this.cache[key] = { val: val, date: date }
-    return true
+    // Returns a promise
+    return this.CacheModel.updateOne({ key: key }, { key: key, val: val, date: date }, { upsert: true })
   }
 
-  isCachedDataGood (key, date = this.getDate()) {
-    if (this.cache[key] === undefined || this.cache[key].date === undefined || this.cache[key].date.localeCompare(date) < 0) {
+  isCachedDateGood (date = this.getDate()) {
+    // Checks if given day matches todays day
+    if (!date || date.localeCompare(date) < 0) {
       return false
     }
-
     return true
   }
 
-  getCachedData (key, date = this.getDate()) {
-    // Refuse out of date data
-    if (this.isCachedDataGood(key, date)) {
-      return this.cache[key]
-    }
-
-    console.error(`\nRequest for cache failed due to it not existing, or being out of date at key: ${key}.\nReturned NULL instead.\n`)
-    return null
+  getCachedData (key) {
+    // Returns promise. Value will be NULL if its out of date or doesnt exist.
+    return this.CacheModel.findOne({ key: key }).then((data) => {
+      if (data && data.date) {
+        // Check date
+        if (this.isCachedDateGood(data.date)) {
+          return data
+        } else {
+          return null
+        }
+      } else {
+        return null
+      }
+    })
   }
 }
 
