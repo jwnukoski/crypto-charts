@@ -22,7 +22,7 @@ function Graph (props: graphProps) {
 
   return (
   <div className="graphWrapper">
-    <CanvasJSChart options={props.options} onRef={ref => { chart = ref } }/>
+    <CanvasJSChart options={props.options} onRef={ ref => { chart = ref } }/>
   </div>
   )
 }

@@ -53,11 +53,11 @@ function Listing (props: listingProps) {
   }, [props.pair])
 
   return (
-  <div className={getListingStyle()} onClick={handleClick}>
-    <div className={styles.listSymbol}>{niceSymbol}</div>
-    <div className={styles.listName}>{niceName}</div>
-    <div className={styles.pairName}>{props.pair}</div>
-  </div>
+  <button className={getListingStyle()} onClick={handleClick}>
+    <span className={styles.listSymbol}>{niceSymbol}</span>
+    <span className={styles.listName}>{niceName}</span>
+    <span className={styles.pairName}>{props.pair}</span>
+  </button>
   )
 }
 
