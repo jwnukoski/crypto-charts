@@ -1,8 +1,12 @@
-/* eslint-disable no-tabs */
-import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styles from './css/listing.module.css'
 
+type listingProps = {
+  index: number;
+  data: any;
+  selectedMarket: number;
+  setMarket: any;
+}
 /**
  * Represents a single market listing. client/src/markets/listing.jsx
  * @param {object} props - The react props.
@@ -11,7 +15,7 @@ import styles from './css/listing.module.css'
  * @param {number} props.selectedMarket - The current selected market. Used to highlight this listing if it matches the props.index.
  * @param {function} props.setMarket - The function to call upon a user click, which sets the market.
  */
-function Listing (props) {
+function Listing (props: listingProps) {
   function getListingStyle () {
     if (props.selectedMarket === props.index) {
       return styles.listingWrapperActive
@@ -25,17 +29,10 @@ function Listing (props) {
   }
 
   return (
-		<div className={getListingStyle()} onClick={handleClick}>
-      <div className={styles.listExchange}>{props.data.exchange}</div>
-    </div>
+  <div className={getListingStyle()} onClick={handleClick}>
+    <div className={styles.listExchange}>{props.data.exchange}</div>
+  </div>
   )
-}
-
-Listing.propTypes = {
-  index: PropTypes.number,
-  data: PropTypes.object,
-  selectedMarket: PropTypes.number,
-  setMarket: PropTypes.func
 }
 
 export default Listing

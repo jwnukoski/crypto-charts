@@ -24,7 +24,7 @@ function getCacheOrQueryThenSend (apiUrl, key, res, dataMunipulatorCallback) {
 }
 
 app.use(compression())
-app.use(express.static(path.join(__dirname, '../client/dist')))
+app.use(express.static(path.join(__dirname, '../build')))
 
 app.get('/api/pairinfo/:pair', (req, res) => {
   const pair = req.params.pair

@@ -1,8 +1,22 @@
-/* eslint-disable no-tabs */
-import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './css/assets.module.css'
-import Listing from './listing.jsx'
+import Listing from './listing'
+
+type pair = {
+  pair: string;
+  route: string;
+}
+
+interface market {
+  exchange: string;
+  pairs: pair[];
+}
+
+type assetsProps = {
+  markets: market[];
+  selectedMarket: number;
+  getInfo: any;
+}
 
 /**
  * Represents all the available assets ('ie coins') for the selected market.
@@ -11,7 +25,7 @@ import Listing from './listing.jsx'
  * @param {number} - The user selected index relating to props.markets.
  * @param {function} props.getInfo - The function that is called after selecting an asset, which gets the asset info. Passed down to the asset calling upon clicking.
  */
-function Assets (props) {
+function Assets (props: assetsProps) {
   const [selectedAsset, setSelectedAsset] = useState(0)
 
   function getList () {
@@ -23,7 +37,7 @@ function Assets (props) {
           <h2>Assets for {market.exchange}</h2>
           <div className={styles.assetsList}>
             {
-              market.pairs.map((row, index) => {
+              market.pairs.map((row: any, index: any) => {
                 return <Listing pair={row.pair} route={row.route} index={index} key={index} market={market.exchange} getInfo={props.getInfo} selectedAsset={selectedAsset} setSelectedAsset={setSelectedAsset}/>
               })
             }
@@ -38,16 +52,10 @@ function Assets (props) {
   }
 
   return (
-		<div className={styles.assetsWrapper}>
-      {getList()}
-    </div>
+  <div className={styles.assetsWrapper}>
+    {getList()}
+  </div>
   )
-}
-
-Assets.propTypes = {
-  markets: PropTypes.array,
-  selectedMarket: PropTypes.number,
-  getInfo: PropTypes.func
 }
 
 export default Assets
