@@ -59,6 +59,7 @@ function App () {
 
     data[period].forEach((row: any) => {
       // close time is in unix time
+      console.log(row)
       const closeTime = new Date(row[0] * 1000)
       const closePrice = row[4]
       formattedDataPoints.push({ x: closeTime, y: closePrice })
@@ -156,7 +157,9 @@ function App () {
         </div>
         <div className="col-lg-8 col-md-6 col-sm-12 col-12">
           <Graph options={graphOptions}/>
-          <div className={styles.price}>{currency}: {assetPrice}</div>
+          { assetPrice
+            ? <div className={styles.price}>{currency}: {assetPrice}</div>
+            : null}
         </div>
         <div className="col-lg-2 col-md-6 col-sm-12 col-12">
           <Assets markets={markets} selectedMarket={selectedMarket} getInfo={getInfo}/>
