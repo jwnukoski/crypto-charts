@@ -59,7 +59,6 @@ function App () {
 
     data[period].forEach((row: any) => {
       // close time is in unix time
-      console.log(row)
       const closeTime = new Date(row[0] * 1000)
       const closePrice = row[4]
       formattedDataPoints.push({ x: closeTime, y: closePrice })

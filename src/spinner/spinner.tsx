@@ -3,7 +3,6 @@ import styles from './css/spinner.module.css'
 
 type spinnerProps = {
   displayLoadingSpinner: boolean;
-
 }
 /**
  * Represents the loading spinner

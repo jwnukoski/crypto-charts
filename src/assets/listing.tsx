@@ -1,8 +1,16 @@
-/* eslint-disable no-tabs */
-import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import styles from './css/listing.module.css'
+
+type listingProps = {
+  pair: string;
+  route: string;
+  index: number;
+  market: string;
+  getInfo: any;
+  selectedAsset: number;
+  setSelectedAsset: any;
+}
 
 /**
  * Represents a single asset list (ie bitcoin). client/src/assets/listing.jsx
@@ -16,7 +24,7 @@ import styles from './css/listing.module.css'
  * @param {number} props.index - The index of the asset listing in relation to the assets list.
  * @param {funciton} props.setSelectedAsset - Function to set the selected asset state.
  */
-function Listing (props) {
+function Listing (props: listingProps) {
   const [niceName, setNiceName] = useState('')
   const [niceSymbol, setNiceSymbol] = useState('')
 
@@ -45,23 +53,12 @@ function Listing (props) {
   }, [props.pair])
 
   return (
-		<div className={getListingStyle()} onClick={handleClick}>
-      <div className={styles.listSymbol}>{niceSymbol}</div>
-      <div className={styles.listName}>{niceName}</div>
-      <div className={styles.pairName}>{props.pair}</div>
-    </div>
+  <div className={getListingStyle()} onClick={handleClick}>
+    <div className={styles.listSymbol}>{niceSymbol}</div>
+    <div className={styles.listName}>{niceName}</div>
+    <div className={styles.pairName}>{props.pair}</div>
+  </div>
   )
-}
-
-Listing.propTypes = {
-  pair: PropTypes.string,
-  route: PropTypes.string,
-  selectedAsset: PropTypes.number,
-  setAsset: PropTypes.func,
-  getInfo: PropTypes.func,
-  market: PropTypes.string,
-  index: PropTypes.number,
-  setSelectedAsset: PropTypes.func
 }
 
 export default Listing
