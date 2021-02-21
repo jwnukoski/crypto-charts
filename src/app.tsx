@@ -92,7 +92,6 @@ function App () {
     setDisplayLoadingSpinner(true)
 
     axios.get(`/api/info/${market}/${pair}/${currency}`).then((response: any) => {
-      console.log('info data: ', response.data)
       return response.data
     }).then((info: any) => {
       setAssetPrice(info.val.price)
