@@ -2,7 +2,7 @@ import { CanvasJSChart } from 'canvasjs-react-charts'
 import React, { useEffect } from 'react'
 
 type graphProps = {
-  options: any;
+  options: object;
 }
 
 /**
@@ -22,7 +22,7 @@ function Graph (props: graphProps) {
 
   return (
   <div className="graphWrapper">
-    <CanvasJSChart options={props.options} onRef={ref => { chart = ref } }/>
+    <CanvasJSChart options={props.options} onRef={ ref => { chart = ref } }/>
   </div>
   )
 }

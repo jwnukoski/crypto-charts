@@ -8,19 +8,27 @@ const axios = require('axios')
 const dailyCache = new cache.DailyCache()
 
 function getCacheOrQueryThenSend (apiUrl, key, res, dataMunipulatorCallback) {
-  if (dailyCache.isCachedDataGood(key)) {
-    res.status(200).send(dailyCache.getCachedData(key))
-  } else {
-    axios.get(apiUrl).then(response => {
-      return dataMunipulatorCallback(response)
-    }).then(cleanedData => {
-      dailyCache.addToCache(key, cleanedData)
-      res.status(200).send(dailyCache.getCachedData(key))
-    }).catch(err => {
-      console.error(err)
-      res.status(401).send(err)
-    })
-  }
+  return dailyCache.getCachedData(key).then((val) => {
+    if (val !== null) {
+      res.status(200).send(val)
+      return true
+    } else {
+      return axios.get(apiUrl).then(response => {
+        return dataMunipulatorCallback(response)
+      }).then(cleanedData => {
+        return dailyCache.addToCache(key, cleanedData)
+      }).then(() => {
+        return dailyCache.getCachedData(key)
+      }).then((val) => {
+        res.status(200).send(val)
+        return true
+      }).catch(err => {
+        console.error(err)
+        res.status(401).send(err)
+        return false
+      })
+    }
+  })
 }
 
 app.use(compression())
@@ -81,43 +89,52 @@ app.get('/api/markets/:currency', (req, res) => {
 
 app.get('/api/info/:market/:asset/:currency', (req, res) => {
   const asset = req.params.asset
-  const market = req.params.market
+  const pair = req.params.market
   const coinInfo = {}
 
   const baseApiEndpoint = 'https://api.cryptowat.ch/markets'
-  const priceApiEndpoint = `${baseApiEndpoint}/${market}/${asset}/price`
-  const ohlcApiEndpoint = `${baseApiEndpoint}/${market}/${asset}/ohlc`
+  const priceApiEndpoint = `${baseApiEndpoint}/${pair}/${asset}/price`
+  const ohlcApiEndpoint = `${baseApiEndpoint}/${pair}/${asset}/ohlc`
 
-  if (dailyCache.isCachedDataGood(`info_${asset}_${market}`)) {
-    res.status(200).send(dailyCache.getCachedData(`info_${asset}_${market}`))
-  } else {
-    axios.get(priceApiEndpoint).then(priceResponse => {
-      // price
-      if (priceResponse.data.result === undefined) {
-        throw new Error(`Error getting price for ${asset} at ${market}.`)
-      }
+  dailyCache.getCachedData(`info_${asset}_${pair}`).then(data => {
+    if (data !== null) {
+      return data
+    } else {
+      return axios.get(priceApiEndpoint).then(priceResponse => {
+        // price
+        if (priceResponse.data.result === undefined) {
+          throw new Error(`Error getting price for ${asset} at ${pair}.`)
+        }
 
-      return priceResponse.data.result.price
-    }).then(price => {
-      coinInfo.price = price
-      return axios.get(ohlcApiEndpoint)
-    }).then(ohlcResponse => {
-      // ohlc candlesticks
-      if (ohlcResponse.data.result === undefined) {
-        throw new Error(`Error getting OHLC for ${asset} at ${market}.`)
-      }
+        return priceResponse.data.result.price
+      }).then(price => {
+        coinInfo.price = price
+        return axios.get(ohlcApiEndpoint)
+      }).then(ohlcResponse => {
+        // ohlc candlesticks
+        if (ohlcResponse.data.result === undefined) {
+          throw new Error(`Error getting OHLC for ${asset} at ${pair}.`)
+        }
 
-      return ohlcResponse.data.result
-    }).then(ohlcData => {
-      // cache and respond
-      coinInfo.ohlc = ohlcData
-      dailyCache.addToCache(`info_${asset}_${market}`, coinInfo)
-      res.status(200).send(dailyCache.getCachedData(`info_${asset}_${market}`))
-    }).catch(err => {
-      console.error(`Error in /api/info/asset: ${err}`)
-      res.status(401).send(err)
-    })
-  }
+        return ohlcResponse.data.result
+      }).then(ohlcData => {
+        // cache and respond
+        coinInfo.ohlc = ohlcData
+        return dailyCache.addToCache(`info_${asset}_${pair}`, coinInfo)
+      }).then(() => {
+        return dailyCache.getCachedData(`info_${asset}_${pair}`)
+      }).catch(err => {
+        console.error(`Error in /api/info/asset: ${err}`)
+        res.status(401).send(err)
+      })
+    }
+  }).then(cachedData => {
+    if (cachedData !== null) {
+      res.status(200).send(cachedData)
+    } else {
+      res.status(400).send('Error getting API data')
+    }
+  })
 })
 
 app.listen(process.env.PORT || 3000, () => {

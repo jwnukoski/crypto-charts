@@ -28,11 +28,7 @@ function App () {
   const [currency] = useState('usd')
   const [assetPrice, setAssetPrice] = useState(0)
   const [displayLoadingSpinner, setDisplayLoadingSpinner] = useState(false)
-
-  // TODO: Implement different periods for graph data.
   const [period] = useState(604800)
-  // 604800 1 week, 259200 3 days
-  // https://docs.cryptowat.ch/rest-api/markets/ohlc
 
   /**
    * Set the market for the user. This should also updates the currencies available to the user.
@@ -51,14 +47,14 @@ function App () {
 
   /**
    * Prepares and sets the graph data.
-   * @param {array} data - This should be the OHLC candlestick data, or whatever data you want to be graphed.
-   * @param {string} niceName - Title for the graph
+   * @param {array} data - This should be the OHLC candlestick data.
+   * @param {string} niceName - Title for the graph.
    */
   function cleanGraphData (data: any, niceName = '') {
     const formattedDataPoints: Array<datePoint> = []
 
     data[period].forEach((row: any) => {
-      // close time is in unix time
+      // Unix time
       const closeTime = new Date(row[0] * 1000)
       const closePrice = row[4]
       formattedDataPoints.push({ x: closeTime, y: closePrice })
