@@ -37,6 +37,7 @@ There is currently jsdoc generated documentation available for the React client 
 	- Standard styling
 - jsdoc
 	- For documentation
+	- better-docs for TypeScript doc compiling
 
 ## Endpoints
 ### /api/pairinfo/:pair
