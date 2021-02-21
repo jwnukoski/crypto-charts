@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Nav</title>
+  <title> assets/listing.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,158 +75,83 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>Nav</h1>
+                    <p>Source</p>
+                    <h1>assets/listing.tsx</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Nav<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="Nav">
-        <a class="href-link" href="#Nav">#</a>
-        
-        <span class="code-name">
-            
-                new Nav<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        Represents the header. Additional navigation to pages should go here.
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="nav_nav.tsx.html" class="button">View Source</a>
-            <span>
-                <a href="nav_nav.tsx.html">nav/nav.tsx</a>, <a href="nav_nav.tsx.html#line8">line 8</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import styles from './css/listing.module.css'
+
+type listingProps = {
+  pair: string;
+  route: string;
+  index: number;
+  market: string;
+  getInfo: any;
+  selectedAsset: number;
+  setSelectedAsset: any;
+}
+
+/**
+ * Represents a single asset list (ie bitcoin). client/src/assets/listing.jsx
+ * @param {object} props - The react props.
+ * @param {string} props.pair - See: https://docs.cryptowat.ch/rest-api/pairs
+ * @param {string} props.route - See: https://docs.cryptowat.ch/rest-api/pairs
+ * @param {number} props.selectedAsset - The user selected asset. This is an index relating to the available assets array.
+ * @param {function} props.setAsset - Function to call when a user clicks on an asset.
+ * @param {function} props.getInfo - Function which fetches the information for a given asset.
+ * @param {string} props.market - The market name.
+ * @param {number} props.index - The index of the asset listing in relation to the assets list.
+ * @param {funciton} props.setSelectedAsset - Function to set the selected asset state.
+ */
+function Listing (props: listingProps) {
+  const [niceName, setNiceName] = useState('')
+  const [niceSymbol, setNiceSymbol] = useState('')
+
+  function getPairNiceName () {
+    axios.get(`/api/pairinfo/${props.pair}`).then(res => {
+      setNiceName(res.data.val.name)
+      setNiceSymbol(res.data.val.symbol)
+    })
+  }
+
+  function getListingStyle () {
+    if (props.selectedAsset === props.index) {
+      return styles.listingWrapperActive
+    }
+
+    return styles.listingWrapperInactive
+  }
+
+  function handleClick () {
+    props.setSelectedAsset(props.index)
+    props.getInfo(props.pair, props.market, niceName)
+  }
+
+  useEffect(() => {
+    getPairNiceName()
+  }, [props.pair])
+
+  return (
+  &lt;button className={getListingStyle()} onClick={handleClick}>
+    &lt;span className={styles.listSymbol}>{niceSymbol}&lt;/span>
+    &lt;span className={styles.listName}>{niceName}&lt;/span>
+    &lt;span className={styles.pairName}>{props.pair}&lt;/span>
+  &lt;/button>
+  )
+}
+
+export default Listing
+</code></pre>
+        </article>
+    </section>
 
 
 
