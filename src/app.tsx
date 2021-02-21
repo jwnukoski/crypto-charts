@@ -120,18 +120,6 @@ function App () {
   }
 
   /**
-   * Returns the loading spinner if the state 'displayLoadingSpinner' is set to true.
-   * @param {boolean} status - The React state 'displayLoadingSpinner'
-   */
-  function getLoadingSpinner () {
-    if (displayLoadingSpinner) {
-      return <Spinner displayLoadingSpinner={displayLoadingSpinner}/>
-    } else {
-      return <span></span>
-    }
-  }
-
-  /**
    * Calls getMarkets() at initial load.
    */
   useEffect(() => {
@@ -140,7 +128,9 @@ function App () {
 
   return (
     <div className="container-fluid">
-      {getLoadingSpinner()}
+      { displayLoadingSpinner
+        ? <Spinner displayLoadingSpinner={displayLoadingSpinner}/>
+        : null }
       <div className="row">
         <div className="col-12">
           <Nav/>
