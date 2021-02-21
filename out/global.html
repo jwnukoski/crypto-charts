@@ -1,25 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Global</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Global</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
 </head>
 
-<body>
 
-<div id="main">
 
-    <h1 class="page-title">Global</h1>
-
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
     
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Nav.html">Nav</a></li><li><a href="Spinner.html">Spinner</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Assets">Assets</a></li><li><a href="global.html#Graph">Graph</a></li><li><a href="global.html#Listing">Listing</a></li><li><a href="global.html#Markets">Markets</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Title</p>
+                    <h1>Global</h1>
+                </header>
+                
 
 
 
@@ -66,7 +123,6 @@
     
 
     
-
     
 
     
@@ -80,7 +136,7 @@
         
     
     </div>
-
+    
     
 
     
@@ -96,24 +152,31 @@
     
 
     
-        <h3 class="subsection-title">Methods</h3>
-
-        
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
             
+                <div class="member">
 
+
+    
+    <h4 class="name" id="Assets">
+        <a class="href-link" href="#Assets">#</a>
+        
+        <span class="code-name">
+            
+                Assets<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="Assets"><span class="type-signature"></span>Assets<span class="signature">(props)</span><span class="type-signature"></span></h4>
     
-
+    <div class="description">
+        Represents all the available assets ('ie coins') for the selected market.
+    </div>
     
-
-
-
-<div class="description">
-    Represents all the available assets ('ie coins') for the selected market.
-</div>
 
 
 
@@ -125,121 +188,129 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>props</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">object</span>
 
 
-            
-            </td>
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The react props.</td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code></code></td>
+  
 
-            
-
-            <td class="description last">The react props.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code></code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">array</span>
 
 
-            
-            </td>
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The available markets.</td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code></code></td>
+  
 
-            
-
-            <td class="description last">The available markets.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code></code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">number</span>
 
 
-            
-            </td>
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The user selected index relating to props.markets.</td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props.getInfo</code></td>
+  
 
-            
-
-            <td class="description last">The user selected index relating to props.markets.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>props.getInfo</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">function</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The function that is called after selecting an asset, which gets the asset info. Passed down to the asset calling upon clicking.</td>
-        </tr>
+  <td class="description last">The function that is called after selecting an asset, which gets the asset info. Passed down to the asset calling upon clicking.</td>
+</tr>
 
-    
-    </tbody>
-</table>
 
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -270,18 +341,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_assets.jsx.html">assets/assets.jsx</a>, <a href="assets_assets.jsx.html#line14">line 14</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="assets_assets.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="assets_assets.tsx.html">assets/assets.tsx</a>, <a href="assets_assets.tsx.html#line12">line 12</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -304,22 +376,30 @@
 
 
 
-        
-            
 
-    
-
-    
-    <h4 class="name" id="Graph"><span class="type-signature"></span>Graph<span class="signature">(props)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Represents the visual graph. Currently uses CanvasJS.
 </div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="Graph">
+        <a class="href-link" href="#Graph">#</a>
+        
+        <span class="code-name">
+            
+                Graph<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Represents the visual graph. Currently uses CanvasJS.
+    </div>
+    
 
 
 
@@ -331,101 +411,80 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>props</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The react props.
-                <h6>Properties</h6>
-                
+  <td class="description last">The react props.</td>
+</tr>
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+  
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>options</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The settings and data for the graph to display.</td>
-        </tr>
+  <td class="description last">The settings and data for the graph to display.</td>
+</tr>
 
-    
-    </tbody>
-</table>
+  
 
-            </td>
-        </tr>
 
-    
-    </tbody>
-</table>
-
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -456,18 +515,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="graph_graph.jsx.html">graph/graph.jsx</a>, <a href="graph_graph.jsx.html#line13">line 13</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="graph_graph.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="graph_graph.tsx.html">graph/graph.tsx</a>, <a href="graph_graph.tsx.html#line9">line 9</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -490,22 +550,30 @@
 
 
 
-        
-            
 
-    
-
-    
-    <h4 class="name" id="Listing"><span class="type-signature"></span>Listing<span class="signature">(props)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Represents a single asset list (ie bitcoin). client/src/assets/listing.jsx
 </div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="Listing">
+        <a class="href-link" href="#Listing">#</a>
+        
+        <span class="code-name">
+            
+                Listing<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Represents a single asset list (ie bitcoin). client/src/assets/listing.jsx
+    </div>
+    
 
 
 
@@ -517,517 +585,484 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>props</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The react props.
-                <h6>Properties</h6>
-                
+  <td class="description last">The react props.</td>
+</tr>
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+  
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>pair</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>pair</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">string</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">See: https://docs.cryptowat.ch/rest-api/pairs</td>
-        </tr>
+  <td class="description last">See: https://docs.cryptowat.ch/rest-api/pairs</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>route</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>route</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">string</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">See: https://docs.cryptowat.ch/rest-api/pairs</td>
-        </tr>
+  <td class="description last">See: https://docs.cryptowat.ch/rest-api/pairs</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>selectedAsset</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>selectedAsset</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">number</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The user selected asset. This is an index relating to the available assets array.</td>
-        </tr>
+  <td class="description last">The user selected asset. This is an index relating to the available assets array.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>setAsset</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>setAsset</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">function</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Function to call when a user clicks on an asset.</td>
-        </tr>
+  <td class="description last">Function to call when a user clicks on an asset.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>getInfo</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>getInfo</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">function</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Function which fetches the information for a given asset.</td>
-        </tr>
+  <td class="description last">Function which fetches the information for a given asset.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>market</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>market</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">string</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The market name.</td>
-        </tr>
+  <td class="description last">The market name.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>index</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>index</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">number</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The index of the asset listing in relation to the assets list.</td>
-        </tr>
+  <td class="description last">The index of the asset listing in relation to the assets list.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>setSelectedAsset</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>setSelectedAsset</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">funciton</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Function to set the selected asset state.</td>
-        </tr>
+  <td class="description last">Function to set the selected asset state.</td>
+</tr>
 
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_listing.jsx.html">assets/listing.jsx</a>, <a href="assets_listing.jsx.html#line19">line 19</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="Listing"><span class="type-signature"></span>Listing<span class="signature">(props)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Represents a single market listing. client/src/markets/listing.jsx
+        </tbody>
+    </table>
 </div>
 
 
 
 
 
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="assets_listing.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="assets_listing.tsx.html">assets/listing.tsx</a>, <a href="assets_listing.tsx.html#line17">line 17</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="Listing">
+        <a class="href-link" href="#Listing">#</a>
+        
+        <span class="code-name">
+            
+                Listing<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Represents a single market listing. client/src/markets/listing.jsx
+    </div>
+    
+
+
+
+
+
 
 
 
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>props</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The react props.
-                <h6>Properties</h6>
-                
+  <td class="description last">The react props.</td>
+</tr>
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+  
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>index</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>index</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">number</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The index of this listing in regards to the markets list.</td>
-        </tr>
+  <td class="description last">The index of this listing in regards to the markets list.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>data</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The data of the market, which contains the exchange name.</td>
-        </tr>
+  <td class="description last">The data of the market, which contains the exchange name.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>selectedMarket</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>selectedMarket</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">number</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The current selected market. Used to highlight this listing if it matches the props.index.</td>
-        </tr>
+  <td class="description last">The current selected market. Used to highlight this listing if it matches the props.index.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>setMarket</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>setMarket</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">function</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The function to call upon a user click, which sets the market.</td>
-        </tr>
+  <td class="description last">The function to call upon a user click, which sets the market.</td>
+</tr>
 
-    
-    </tbody>
-</table>
+  
 
-            </td>
-        </tr>
 
-    
-    </tbody>
-</table>
-
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1058,18 +1093,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="markets_listing.jsx.html">markets/listing.jsx</a>, <a href="markets_listing.jsx.html#line14">line 14</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="markets_listing.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="markets_listing.tsx.html">markets/listing.tsx</a>, <a href="markets_listing.tsx.html#line12">line 12</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1092,18 +1128,26 @@
 
 
 
-        
+
+</div>
             
+                <div class="member">
 
+
+    
+    <h4 class="name" id="Markets">
+        <a class="href-link" href="#Markets">#</a>
+        
+        <span class="code-name">
+            
+                Markets<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="Markets"><span class="type-signature"></span>Markets<span class="signature">(props)</span><span class="type-signature"></span></h4>
     
-
-    
-
-
 
 
 
@@ -1115,147 +1159,126 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>props</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The react props.
-                <h6>Properties</h6>
-                
+  <td class="description last">The react props.</td>
+</tr>
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+  
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>markets</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>markets</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">array</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The markets array to propigate the list with.</td>
-        </tr>
+  <td class="description last">The markets array to propigate the list with.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>selectedMarket</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>selectedMarket</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">number</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The user selected market. This is the index in regards to props.markets. Passed down to the individual listing for highlighting.</td>
-        </tr>
+  <td class="description last">The user selected market. This is the index in regards to props.markets. Passed down to the individual listing for highlighting.</td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>setMarket</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>setMarket</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">function</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">The function to update the user selected market with. This is passed down to the individual market listing, so it can be called upon click.</td>
-        </tr>
+  <td class="description last">The function to update the user selected market with. This is passed down to the individual market listing, so it can be called upon click.</td>
+</tr>
 
-    
-    </tbody>
-</table>
+  
 
-            </td>
-        </tr>
 
-    
-    </tbody>
-</table>
-
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1286,18 +1309,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="markets_markets.jsx.html">markets/markets.jsx</a>, <a href="markets_markets.jsx.html#line14">line 14</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="markets_markets.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="markets_markets.tsx.html">markets/markets.tsx</a>, <a href="markets_markets.tsx.html#line12">line 12</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1320,7 +1344,11 @@
 
 
 
-        
+
+</div>
+            
+            </div>
+        </div>
     
 
     
@@ -1333,19 +1361,25 @@
 
 
 
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Nav.html">Nav</a></li><li><a href="Spinner.html">Spinner</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Assets">Assets</a></li><li><a href="global.html#Graph">Graph</a></li><li><a href="global.html#Listing">Listing</a></li><li><a href="global.html#Markets">Markets</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Feb 04 2021 00:18:17 GMT-0500 (Eastern Standard Time)
-</footer>
-
-<script> prettyPrint(); </script>
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
 <script src="scripts/linenumber.js"> </script>
+
 </body>
 </html>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Nav</title>
+  <title> spinner/spinner.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,158 +75,39 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>Nav</h1>
+                    <p>Source</p>
+                    <h1>spinner/spinner.tsx</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Nav<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="Nav">
-        <a class="href-link" href="#Nav">#</a>
-        
-        <span class="code-name">
-            
-                new Nav<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        Represents the header. Additional navigation to pages should go here.
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="nav_nav.tsx.html" class="button">View Source</a>
-            <span>
-                <a href="nav_nav.tsx.html">nav/nav.tsx</a>, <a href="nav_nav.tsx.html#line8">line 8</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react'
+import styles from './css/spinner.module.css'
+
+type spinnerProps = {
+  displayLoadingSpinner: boolean;
+}
+/**
+ * Represents the loading spinner
+ * @constructor
+ */
+function Spinner (props: spinnerProps) {
+  return (
+    &lt;div className={styles.spinnerOverlay}>
+        &lt;img src="spinner.gif" alt="loading spinner" className={styles.spinner}>&lt;/img>
+        &lt;span className={styles.loadingTxt}>Loading...&lt;/span>
+    &lt;/div>
+  )
+}
+
+export default Spinner
+</code></pre>
+        </article>
+    </section>
 
 
 
