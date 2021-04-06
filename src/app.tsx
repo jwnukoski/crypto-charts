@@ -50,7 +50,7 @@ function App () {
    * @param {array} data - This should be the OHLC candlestick data.
    * @param {string} niceName - Title for the graph.
    */
-  function cleanGraphData (data: any, niceName = '') {
+  function cleanGraphData (data: Array<ohlc>, niceName = '') {
     const formattedDataPoints: Array<datePoint> = []
 
     data[period].forEach((row: any) => {
@@ -82,6 +82,19 @@ function App () {
     })
   }
 
+  type ohlc = [number, number, number, number, number]
+
+  interface marketResponseData {
+    val: {
+      price: number,
+      ohlc: Array<ohlc>
+    }
+  }
+
+  interface makertResponse {
+    data: marketResponseData
+  }
+
   /**
    * Request all relevant asset data from the ExpressJS server, then call cleanGraphData to display it on the graph.
    * @param {string} pair - See: https://docs.cryptowat.ch/rest-api/pairs
@@ -91,9 +104,9 @@ function App () {
   function getInfo (pair: string, market: string, niceName = '') {
     setDisplayLoadingSpinner(true)
 
-    axios.get(`/api/info/${market}/${pair}/${currency}`).then((response: any) => {
+    axios.get(`/api/info/${market}/${pair}/${currency}`).then((response: makertResponse) => {
       return response.data
-    }).then((info: any) => {
+    }).then((info: marketResponseData) => {
       setAssetPrice(info.val.price)
       cleanGraphData(info.val.ohlc, niceName)
       setDisplayLoadingSpinner(false)
