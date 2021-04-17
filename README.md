@@ -5,10 +5,6 @@ A single-page app for viewing the historical price data for cryptocurrencies.
 ## API
 This app uses https://docs.cryptowat.ch/rest-api/. It is free, however it has a limited amount of requests per day. This is why a server-side daily cache has been implemented. The larger a user base grows, the more this will need improved.  
 
-Update:  
-A MongoDB cache has been implemented for those that want to deploy this on a larger scale.  
-The Heroku Demo will continue to use the NodeJS daily memory cache for now.  
-
 ## Documentation
 There is currently jsdoc generated documentation available for the React client in the ./out folder.  
 
