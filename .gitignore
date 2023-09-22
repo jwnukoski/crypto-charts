@@ -1,3 +1,5 @@
 .env
 node_modules
 cache-database/data
+app/frontend/build
+.vscode
