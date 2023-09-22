@@ -1,0 +1,33 @@
+services:
+  cache-database:
+    container_name: cache-database
+    image: mongo:6.0
+    ports:
+      - 27017
+    volumes:
+      - ./cache-database/data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${CACHE_DB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${CACHE_DB_ROOT_PASSWORD}
+
+  api:
+    container_name: api
+    build:
+      context: ./
+      dockerfile: ./app/api/Dockerfile
+    restart: always
+    ports:
+      - ${REACT_APP_API_PORT}:3000
+    depends_on:
+      - cache-database
+
+  web:
+    container_name: web
+    build:
+      context: ./
+      dockerfile: ./app/frontend/Dockerfile
+    restart: always
+    ports:
+      - ${REACT_APP_WEB_PORT}:3001
+    depends_on:
+      - api
