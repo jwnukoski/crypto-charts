@@ -1,2 +1,3 @@
-node_modules/
-client/dist/bundle.js
+.env
+node_modules
+cache-database/data

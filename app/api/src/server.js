@@ -5,6 +5,8 @@ const app = express()
 const path = require('path')
 const axios = require('axios')
 
+require('dotenv').config()
+
 const dailyCache = new cache.DailyCache()
 
 function getCacheOrQueryThenSend (apiUrl, key, res, dataMunipulatorCallback) {
