@@ -9,7 +9,7 @@ class DailyCache {
 
   async init() {
     try {
-      this.db = await mongoose.connect(`mongodb://${process.env.CACHE_DB_USER}:${process.env.CACHE_DB_PASS}@crypto-charts:27017/crypto-charts`, { 
+      this.db = await mongoose.connect(`mongodb://${process.env.CACHE_DB_USER}:${process.env.CACHE_DB_PASS}@cache-database:27017/crypto-charts`, { 
         autoIndex: true, 
         useNewUrlParser: true, 
         useUnifiedTopology: true,
