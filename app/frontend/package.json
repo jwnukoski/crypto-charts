@@ -5,8 +5,10 @@
   "dependencies": {
     "axios": "^0.21.1",
     "canvasjs-react-charts": "^1.0.5",
-    "express": "^4.17.1",
-    "mongoose": "^5.11.15",
+    "compression": "^1.7.4",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "path": "^0.12.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2"
@@ -16,9 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node server/server.js",
-    "server-dev": "nodemon server/server.js",
-    "docs": "jsdoc -c jsdoc.json -r ./src/ -t ./node_modules/better-docs"
+    "server": "node server/server.js"
   },
   "eslintConfig": {
     "extends": [
@@ -48,13 +48,13 @@
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
-    "better-docs": "^2.3.2",
     "eslint": "^7.20.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-react": "^7.22.0",
+    "postcss": "^8.4.30",
     "queue-microtask": "^1.2.2",
     "standardx": "3.0.0",
     "supertest": "^6.1.3",

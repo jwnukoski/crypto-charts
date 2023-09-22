@@ -29,7 +29,7 @@ function Listing (props: listingProps) {
   const [niceSymbol, setNiceSymbol] = useState('')
 
   function getPairNiceName () {
-    axios.get(`/api/pairinfo/${props.pair}`).then(res => {
+    axios.get(`http://api:3000/pairinfo/${props.pair}`).then(res => {
       setNiceName(res.data.val.name)
       setNiceSymbol(res.data.val.symbol)
     })

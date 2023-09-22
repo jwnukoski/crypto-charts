@@ -20,3 +20,14 @@ services:
       - 3000
     depends_on:
       - cache-database
+
+  web:
+    container_name: web
+    build:
+      context: ./
+      dockerfile: ./app/frontend/Dockerfile
+    restart: always
+    ports:
+      - ${WEB_PORT}:3001
+    depends_on:
+      - api

@@ -139,6 +139,7 @@ app.get('/api/info/:market/:asset/:currency', (req, res) => {
   })
 })
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server started on ${process.env.PORT || 3000}`)
+// Port doesn't matter. Only the frontend will ever use this api.
+app.listen(3000, () => {
+  console.log(`Server started on 3000`)
 })
