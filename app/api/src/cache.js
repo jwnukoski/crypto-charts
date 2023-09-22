@@ -8,34 +8,52 @@ class DailyCache {
   }
 
   async init() {
-    this.cacheSchema = new mongoose.Schema({
-      key: {
-        type: String,
-        index: true,
-        unique: true
-      },
-      date: String,
-      val: mongoose.Mixed
-    })
+    try {
+      this.db = await mongoose.connect(`mongodb://${process.env.CACHE_DB_USER}:${process.env.CACHE_DB_PASS}@crypto-charts:27017/crypto-charts`, { 
+        autoIndex: true, 
+        useNewUrlParser: true, 
+        useUnifiedTopology: true,
+      })
+    } catch (error) {
+      console.error(error)
+      this.db = null
+      return null
+    }
+
+    if (this.cacheSchema === null) {
+      this.cacheSchema = new mongoose.Schema({
+        key: {
+          type: String,
+          index: true,
+          unique: true
+        },
+        date: String,
+        val: mongoose.Mixed
+      })
+      
+      if (this.CacheModel === null)
+        this.CacheModel = mongoose.model('cache', this.cacheSchema)
+      
+      // create blank cache entry
+      await this.addToCache('markets', null, '1970/01/01')
+      // remove blank cache entry
+      await this.CacheModel.deleteOne({ key: 'markets' })
+    }
+
+    if (this.db !== null) {
+      return this.db
+    }
+
     
-    this.CacheModel = mongoose.model('cache', this.cacheSchema)
-
-    await new this.CacheModel.create({})
-
-    this.db = mongoose.connect(`mongodb://${process.env.CACHE_DB_ROOT_USERNAME ?? ''}:${process.env.CACHE_DB_ROOT_PASSWORD ?? ''}@cache-database:27017/crypto-charts`, { useNewUrlParser: true, useUnifiedTopology: true })
-
     return this.db
   }
 
   getDate () {
     const dateObj = new Date()
-    return `${String(dateObj.getUTCFullYear())}
-    /${String(dateObj.getUTCMonth() + 1)}
-    /${String(dateObj.getUTCDate())}`
+    return `${String(dateObj.getUTCFullYear())}/${String(dateObj.getUTCMonth() + 1)}/${String(dateObj.getUTCDate())}`
   }
 
   async addToCache (key, val, date = this.getDate()) {
-    // Returns a promise
     return await this.CacheModel.updateOne({ key: key }, { key: key, val: val, date: date }, { upsert: true })
   }
 
@@ -51,6 +69,9 @@ class DailyCache {
     // Returns promise. Value will be NULL if its out of date or doesnt exist.
     if (!this.db)
       await this.init()
+
+    if (!this.db)
+      return null
 
     return await this.CacheModel.findOne({ key: key }).then((data) => {
       if (data && data.date) {

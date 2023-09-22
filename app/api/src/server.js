@@ -4,6 +4,7 @@ const compression = require('compression')
 const app = express()
 const path = require('path')
 const axios = require('axios')
+const cors = require('cors')
 
 require('dotenv').config()
 
@@ -32,6 +33,12 @@ function getCacheOrQueryThenSend (apiUrl, key, res, dataMunipulatorCallback) {
     }
   })
 }
+
+app.use(cors({
+  origin: [`${process.env.REACT_APP_WEB_URL}:${process.env.REACT_APP_WEB_PORT}`,
+          `${process.env.REACT_APP_WEB_URL}:${process.env.REACT_APP_API_PORT}`,
+          `${process.env.REACT_APP_WEB_URL}:${process.env.CACHE_DB_PORT}`]
+}))
 
 app.use(compression())
 app.use(express.static(path.join(__dirname, '../build')))
@@ -139,7 +146,7 @@ app.get('/api/info/:market/:asset/:currency', (req, res) => {
   })
 })
 
-// Port doesn't matter. Only the frontend will ever use this api.
+// Port doesn't matter. Only the frontend will ever use this api. Mapped in docker-compose.
 app.listen(3000, () => {
   console.log(`Server started on 3000`)
 })

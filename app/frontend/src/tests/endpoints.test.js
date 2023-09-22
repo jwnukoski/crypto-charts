@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const request = require('supertest')('http://localhost:3000')
+const request = require('supertest')(`${process.env.REACT_APP_WEB_URL}:${process.env.REACT_APP_API_PORT}`)
 
 describe('/api/pairinfo/:pair', () => {
   it('Should fetch name and symbol from Binance for Bitcoin when given the pair btcusdt', (done) => {

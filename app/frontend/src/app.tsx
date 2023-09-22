@@ -104,7 +104,7 @@ function App () {
   function getInfo (pair: string, market: string, niceName = '') {
     setDisplayLoadingSpinner(true)
 
-    axios.get(`http://api:3000/info/${market}/${pair}/${currency}`).then((response: makertResponse) => {
+    axios.get(`${process.env.REACT_APP_WEB_URL}:${process.env.REACT_APP_API_PORT}/api/info/${market}/${pair}/${currency}`).then((response: makertResponse) => {
       return response.data
     }).then((info: marketResponseData) => {
       setAssetPrice(info.val.price)
@@ -122,7 +122,7 @@ function App () {
   function getMarkets () {
     setDisplayLoadingSpinner(true)
 
-    axios.get(`http://api:3000/markets/${currency}`).then((response: any) => {
+    axios.get(`${process.env.REACT_APP_WEB_URL}:${process.env.REACT_APP_API_PORT}/api/markets/${currency}`).then((response: any) => {
       setMarkets(response.data.val)
       setDisplayLoadingSpinner(false)
       return response.data

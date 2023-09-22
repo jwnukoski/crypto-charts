@@ -17,7 +17,7 @@ services:
       dockerfile: ./app/api/Dockerfile
     restart: always
     ports:
-      - 3000
+      - ${REACT_APP_API_PORT}:3000
     depends_on:
       - cache-database
 
@@ -28,6 +28,6 @@ services:
       dockerfile: ./app/frontend/Dockerfile
     restart: always
     ports:
-      - ${WEB_PORT}:3001
+      - ${REACT_APP_WEB_PORT}:3001
     depends_on:
       - api
